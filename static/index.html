@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadao Ando — Architecture in Silence</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-inner">
+                <h1 class="header-title">
+                    <span class="header-name">Tadao Ando</span>
+                    <span class="header-sub">Architecture in Silence</span>
+                </h1>
+                <button id="settings-toggle" class="btn-icon" aria-label="Settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat Area -->
+        <main class="chat-container">
+            <div id="messages" class="messages">
+                <div class="welcome">
+                    <img src="/static/ando-portrait.jpg" alt="Tadao Ando" class="welcome-portrait">
+                    <div class="welcome-text">
+                        <p>"Architecture should speak with its silence."</p>
+                        <p class="welcome-sub">— Tadao Ando</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <form id="chat-form" class="chat-form">
+                    <input
+                        id="message-input"
+                        type="text"
+                        placeholder="Ask Ando about architecture, life, or his work..."
+                        autocomplete="off"
+                        required
+                    >
+                    <button id="send-btn" type="submit" class="btn-send">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </main>
+
+        <!-- Settings Panel -->
+        <aside id="settings-panel" class="settings-panel hidden">
+            <div class="settings-header">
+                <h2>Knowledge Base</h2>
+                <button id="settings-close" class="btn-icon" aria-label="Close">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="settings-section">
+                <h3>Upload Knowledge</h3>
+                <form id="upload-form" class="upload-form">
+                    <input type="file" id="upload-file" accept=".md,.txt,.pdf,.docx,.xlsx" required>
+                    <button type="submit" class="btn-small">Upload</button>
+                </form>
+                <div id="upload-status" class="upload-status"></div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Loaded Sources (<span id="source-count">0</span>)</h3>
+                <ul id="source-list" class="source-list">
+                    <li class="source-empty">No knowledge sources loaded.</li>
+                </ul>
+                <button id="refresh-sources" class="btn-small">Refresh</button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>
