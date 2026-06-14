@@ -470,7 +470,36 @@ html, body {
         max-width: 90%;
     }
 
+    /* Mobile chat input — optimized for typing */
     .chat-input-area {
         padding: var(--space-sm) var(--space-md);
+        padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom));
+    }
+
+    .chat-form {
+        gap: var(--space-sm);
+    }
+
+    .chat-form input {
+        padding: var(--space-md) var(--space-md);
+        font-size: 16px; /* Prevents iOS zoom on focus */
+        min-height: 44px; /* Minimum tap target size */
+    }
+
+    .btn-send {
+        padding: var(--space-md);
+        min-width: 48px;
+        min-height: 44px;
+        flex-shrink: 0;
+    }
+
+    .btn-send svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    /* Settings panel — full width on mobile */
+    .settings-panel {
+        width: 100vw;
     }
 }
