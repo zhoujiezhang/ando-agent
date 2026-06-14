@@ -4,7 +4,7 @@ Vercel serverless function entry point for Tadao Ando Agent.
 Wraps the FastAPI app for Vercel's Python runtime.
 """
 
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -123,8 +123,8 @@ async def chat(request: ChatRequest):
 
 
 @app.post("/api/knowledge")
-async def upload_knowledge(file):
-    from fastapi import HTTPException, UploadFile
+async def upload_knowledge(file: UploadFile):
+    from fastapi import HTTPException
 
     SUPPORTED_EXTENSIONS = (".md", ".txt", ".pdf", ".docx", ".xlsx")
 
