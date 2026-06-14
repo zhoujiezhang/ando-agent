@@ -65,12 +65,24 @@ def _extract_txt(path: Path) -> str:
 
 def _extract_pdf(path: Path) -> str:
     from pypdf import PdfReader
-    reader = PdfReader(str(path))
+
+    try:
+        reader = PdfReader(str(path))
+    except Exception as e:
+        raise ValueError(f"Failed to read PDF: {e}")
+
     pages = []
     for page in reader.pages:
-        text = page.extract_text()
-        if text:
-            pages.append(text)
+        try:
+            text = page.extract_text()
+            if text and text.strip():
+                pages.append(text)
+        except Exception:
+            continue
+
+    if not pages:
+        raise ValueError("PDF contains no extractable text (may be image-only)")
+
     return "\n\n".join(pages)
 
 
@@ -110,12 +122,25 @@ def _extract_xlsx(path: Path) -> str:
 def _extract_pdf_bytes(content: bytes) -> str:
     from pypdf import PdfReader
     from io import BytesIO
-    reader = PdfReader(BytesIO(content))
+
+    try:
+        reader = PdfReader(BytesIO(content))
+    except Exception as e:
+        raise ValueError(f"Failed to read PDF: {e}")
+
     pages = []
-    for page in reader.pages:
-        text = page.extract_text()
-        if text:
-            pages.append(text)
+    for i, page in enumerate(reader.pages):
+        try:
+            text = page.extract_text()
+            if text and text.strip():
+                pages.append(text)
+        except Exception:
+            # Skip pages that can't be extracted
+            continue
+
+    if not pages:
+        raise ValueError("PDF contains no extractable text (may be image-only)")
+
     return "\n\n".join(pages)
 
 
